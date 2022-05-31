@@ -73,34 +73,13 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        //--- Validation Section
-        $rules = [
-                  'api_token' => 'required'
-                ];
-
-        $validator = Validator::make($request->all(), $rules);
-        
-        if ($validator->fails()) 
+        if($request->checkTokenExistance->delete())
         {
-            return response()->json(['status' => 0, 'message' => 'API Token required'])->setStatusCode(200);
-        }
-        //--- Validation Section Ends
-
-        $checkTokenExistance = OauthClient::with('user')->where(['api_token' => $request->api_token])->first();
-        if($checkTokenExistance)
-        {
-            if($checkTokenExistance->delete())
-            {
-                return response()->json(['status' => 1, 'message' => 'Logout successfully.'])->setStatusCode(200);
-            }
-            else
-            {
-                return response()->json(['status' => 0, 'message' => 'Something went wrong.' ])->setStatusCode(200);
-            }
+            return response()->json(['status' => 1, 'message' => 'Logout successfully.'])->setStatusCode(200);
         }
         else
         {
-            return response()->json(['status' => 0, 'message' => 'No user found' ])->setStatusCode(200);
+            return response()->json(['status' => 0, 'message' => 'Something went wrong.' ])->setStatusCode(200);
         }
     }
 }

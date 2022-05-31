@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request; 
 use App\Models\oauthClient;
 
 class CheckAppAuthentication
@@ -14,11 +15,11 @@ class CheckAppAuthentication
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        if($request->api_token)
+        if($request->header('apiToken'))
         {
-            $checkTokenExistance = OauthClient::with('user')->where(['api_token' => $request->api_token])->first();
+            $checkTokenExistance = OauthClient::with('user')->where(['api_token' => $request->header('apiToken')])->first();
             if($checkTokenExistance)
             {
                 $request->merge(array("checkTokenExistance" => $checkTokenExistance));
