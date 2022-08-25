@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\userActivity;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
@@ -48,6 +50,7 @@ class User extends Authenticatable
      */
     public function activities()
     {
-        return $this->hasMany('App\Models\userActivity');
+        // return $this->hasMany('App\Models\userActivity');
+        return $this->hasMany(userActivity::class);
     }
 }

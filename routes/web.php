@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\UserActivityController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 
 // Admin/Super Admin Auth
@@ -65,4 +65,8 @@ Route::group(['middleware' => ['CommonUserType']], function ()
     Route::any('delete-user-acitivity/{id}', [UserActivityController::class, 'delete'])->name('delete-user-activity');
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+
+Route::fallback(function () {
+    return redirect()->route('welcome');
 });

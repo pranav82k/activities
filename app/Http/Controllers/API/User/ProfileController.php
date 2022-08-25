@@ -4,8 +4,6 @@ namespace App\Http\Controllers\API\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
-use Session;
 use Validator;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -113,12 +111,23 @@ class ProfileController extends Controller
 
         $params = $request->post();
 
-        // $startDate = Carbon::parse($date)->format('Y-m-d H:i');
+        if((array_key_exists('start_date', $params) && array_key_exists('end_date', $params)) && (!empty($params['start_date']) && !empty($params['end_date'])))
+        {
+            $startDate = Carbon::parse($params['start_date'])->format('Y-m-d');
+            $endDate = Carbon::parse($params['end_date'])->format('Y-m-d');
+        }
+        else
+        {
+            // Default dates are previous week
+            $endDate = \Carbon\Carbon::now()->format('Y-m-d');
+            $startDate = Carbon::parse($endDate)->subDays(7)->format('Y-m-d');
+        }
 
-        $currentDate = \Carbon\Carbon::now()->format('Y-m-d');
-        $pastWeekDate = Carbon::parse($currentDate)->subDays(7)->format('Y-m-d');
-        
-        $activityList = $user->activities()->whereDate('created_at', '>=', $pastWeekDate)->whereDate('created_at', '<=', $currentDate)->get();
+        // \DB::enableQueryLog();
+        $activityList = $user->activities()->whereBetween('created_at', [$startDate, $endDate])->get();
+
+        // $activityList = $user->activities()->whereDate('created_at', '>=', $startDate)->whereDate('created_at', '<=', $endDate)->get();
+        // return response()->json(['query' =>\DB::getQueryLog()]);
 
         if ($activityList)
         {

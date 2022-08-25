@@ -130,6 +130,7 @@ class ActivityController extends Controller
                     });
 
                     $activity->user_activities()->sync($attach);
+                    // $activity->user_activities()->syncWithPivotValues($userIds, ['title' => $params['title'], 'description'  => $params['description'], 'featured_image' => $path]);
                 }
 
                 DB::commit();

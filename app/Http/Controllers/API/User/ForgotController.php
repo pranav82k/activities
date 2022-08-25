@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Validator;
-use Hash;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
@@ -31,7 +30,7 @@ class ForgotController extends Controller
         $user = User::where(['email' => $params['email'], 'status' => 1, 'user_role' => 4])->first();
         if($user)
         {
-            $user->reset_code = $autopass = Str::random(8);
+            $user->reset_code = Str::random(8);
             if($user->save())
             {
                 $subject = "Reset Password Code";

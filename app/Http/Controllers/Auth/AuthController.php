@@ -53,6 +53,7 @@ class AuthController extends Controller
             $params = $request->post();
             if(Auth::attempt(array('email' => $params['email'], 'password' => $params['password'])))
             {
+                $request->session()->regenerate();
                 Session::flash('message', 'Logged in successfully'); 
                 Session::flash('class', 'success');
 
@@ -76,12 +77,16 @@ class AuthController extends Controller
         return view('signin');
     }
 
-    public function signOut()
+    public function signOut(Request $request)
     {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         Session::flash('message', 'Logout successfully.'); 
         Session::flash('class', 'success');
 
-        Auth::logout();
         return redirect()->route('signin');   
     }
 }
