@@ -31,6 +31,11 @@ class CreateOauthClientsTable extends Migration
      */
     public function down()
     {
+        Schema::table('oauth_clients', function (Blueprint $table) {
+            // $table->dropIndex(['user_id']);
+            $table->dropForeign(['user_id']);
+        });
+
         Schema::dropIfExists('oauth_clients');
     }
 }

@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/assets/images/favicon.png') }}">
-    <title>{{ config('app.name', 'Quicentro Shopping') }}</title>
+    <title>{{ config('app.name', 'Activities') }}</title>
 
     <!-- Custom CSS -->
     <link href="{{ asset('public/dist/css/style.css') }}" rel="stylesheet">
@@ -44,30 +44,28 @@
                         <div class="text-center">
                             <img src="{{ asset('public/assets/images/logo.png') }}" alt="Quicentro" class="login-logo">
                         </div>
-                       <!--  <h2 class="mt-3 text-center">Admin Panel</h2>
-                        <p class="text-center">Please enter your email and password</p> -->
+                        {{-- <h2 class="mt-3 text-center">Admin Panel</h2>
+                        <p class="text-center">Please enter your email and password</p> --}}
                         <div class="mt-4">
                             <div class="row">
-                                   
                                 <form action="{{ route('signin') }}" method="POST" id="Login">
-                                    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                                    {{-- <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" /> --}}
+                                    @csrf
 
                                     <div class="col-lg-12 col-md-12 floating-label-wrap">
-                                         <input name="email" type="email" id="inputEmail" placeholder="Email Address" class="floating-label-field floating-label-field--s1 name" required value="{{ old('email') }}">
-                                            <label for="" class="floating-label">Email Address</label>
-                                        </div>
+                                        <input name="email" type="email" id="inputEmail" placeholder="Email Address" class="floating-label-field floating-label-field--s1 name" required value="{{ old('email') }}">
+                                        <label for="" class="floating-label">Email Address</label>
+                                    </div>
 
-                                        <div class="col-lg-12 col-md-12 floating-label-wrap">
-                                            <input type="password" name="password"  id="inputPassword" placeholder="Password" class="floating-label-field floating-label-field--s1 name" required autocomplete="off">
-                                            <label for="" class="floating-label">Password</label>
-                                        </div>
+                                    <div class="col-lg-12 col-md-12 floating-label-wrap">
+                                        <input type="password" name="password"  id="inputPassword" placeholder="Password" class="floating-label-field floating-label-field--s1 name" required autocomplete="off">
+                                        <label for="" class="floating-label">Password</label>
+                                    </div>
 
-                                         <div class="col-lg-12 col-md-12 floating-label-wrap">
-                                                 <button type="submit" class="btn btn-primary login-btn">Login</button>
-                                         </div>
-                                   
+                                    <div class="col-lg-12 col-md-12 floating-label-wrap">
+                                        <button type="submit" class="btn btn-primary login-btn">Login</button>
+                                    </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -81,8 +79,6 @@
 
     <!-- ======= Login Section ======= -->
 
-
-
     <script src="{{ asset('public/assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{ asset('public/assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
@@ -93,15 +89,10 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-
     @if(Session::get('class') == 'success')
-    <script>toastr.success('{{ Session::get("message") }}');</script>
+        <script>toastr.success('{{ Session::get("message") }}');</script>
     @elseif(Session::get('class') == 'danger')
-    <script>toastr.error('{{ Session::get("message") }}');</script>
+        <script>toastr.error('{{ Session::get("message") }}');</script>
     @endif
-
-
-
 </body>
-
 </html>

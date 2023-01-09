@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
-use Session;
 use Validator;
 use App\Models\User;
 use App\Models\oauthClient;
@@ -47,7 +46,7 @@ class LoginController extends Controller
             $token->user_id = $user->id;
             $token->api_token = $api_token;
 
-            if(isset($params['device_platform']) && !empty($params['device_platform']))
+            /*if(isset($params['device_platform']) && !empty($params['device_platform']))
             {
                 $token->device_platform = intval($params['device_platform']);
             }
@@ -55,7 +54,7 @@ class LoginController extends Controller
             if(isset($params['device_token']) && !empty($params['device_token']))
             {
                 $token->device_token = $params['device_token'];
-            }
+            }*/
 
             if($user->save() && $token->save())
             {

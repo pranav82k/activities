@@ -21,7 +21,7 @@ class CreateUserActivitiesTable extends Migration
             $table->text('description');
             $table->string('featured_image', 120);
             $table->tinyInteger('particular_edited')->default(0)->comment('Admin Edited For Particular User');
-            $table->tinyInteger('status')->default(1);
+            $table->boolean('status')->default(1);
             $table->softDeletes();
             $table->timestamps();
 
@@ -37,6 +37,11 @@ class CreateUserActivitiesTable extends Migration
      */
     public function down()
     {
+        Schema::table('user_activities', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['activity_id']);
+        });
+
         Schema::dropIfExists('user_activities');
     }
 }

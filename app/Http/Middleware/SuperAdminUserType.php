@@ -21,12 +21,12 @@ class SuperAdminUserType
             return redirect()->route('signin');
         }
 
-        if(Auth::check() && (Auth::user()->user_role == 2 || Auth::user()->user_role == 3))
+        if(Auth::user()->user_role == 2 || Auth::user()->user_role == 3)
         {
             return redirect()->route('dashboard');
         }
 
-        if(Auth::check() && (Auth::user()->user_role == 4))
+        if(Auth::user()->user_role == 4)
         {
             return redirect()->route('customer-profile');
         }

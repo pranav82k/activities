@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->tinyInteger('user_role')->default(1);
-            $table->tinyInteger('status')->default(1);
+            $table->boolean('status')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

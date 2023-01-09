@@ -27,7 +27,7 @@ class CheckAppAuthentication
             }
             else
             {
-                return response()->json(['status' => 0, 'message' => 'Invalid Token.' ])->setStatusCode(200);
+                return response()->json(['status' => 0, 'message' => 'Invalid/Expired Token.' ])->setStatusCode(401);
             }
         }
 

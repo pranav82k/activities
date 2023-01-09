@@ -25,13 +25,13 @@ class AuthController extends Controller
                 return redirect()->route('dashboard');
             }
         }
+        
         if (\Request::isMethod('post'))
         {
             // create the validation rules ------------------------
             $rules = array(
-                // 'name'             => 'required',                        // just a normal required validation
-                'email'            => 'required|email',     // required and must be unique in the ducks table
-                'password'         => 'required',
+                'email' => 'required|email',     // required and must be unique in the ducks table
+                'password' => 'required|min:4',
             );
 
             // do the validation ----------------------------------

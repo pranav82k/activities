@@ -47,20 +47,20 @@
 									<tr>
 										<td class="border-top-0 text-muted px-2 py-4 font-14">{{ $key+1 }}</td>
 										<td class="border-top-0 text-muted px-2 py-4 font-14">
-											{{ $user->name }}  {{ isset($user->last_name)? $user->last_name: '' }}
+											{{ $user->name }}
 										</td>
 										<td class="border-top-0 text-muted px-2 py-4 font-14">
 											{{ $user->email }}
 										</td>
 										<td class="border-top-0 text-muted px-2 py-4 font-14">
-											{{ date('d/m/Y' ,strtotime($user->created_at)) }}
+											{{ date('d/m/Y', strtotime($user->created_at)) }}
 										</td>
 										 
-										 <td class="border-top-0 px-2 py-4">
-												<a href="javascript:void(0);" data-url="{{ route('delete-user', ['id' => $user->id])  }}" class="change-psd-btn px-2 delete_user" title="Delete User"><i class="fas fa-trash"></i></a>
-												<a href="{{ route('user-change-password', ['id' => $user->id])  }}" class="change-psd-btn" title="Change Password"><i class="fas fa-unlock-alt"></i></a>
-												<a href="{{ route('user-activities', ['id' => $user->id]) }}" class="change-psd-btn"><i class="fas fa-eye"></i></a>
-											</td>
+										<td class="border-top-0 px-2 py-4">
+											<a href="javascript:void(0);" data-url="{{ route('delete-user', ['id' => $user->id])  }}" class="change-psd-btn px-2 delete_user" title="Delete User"><i class="fas fa-trash"></i></a>
+											<a href="{{ route('user-change-password', ['id' => $user->id])  }}" class="change-psd-btn" title="Change Password"><i class="fas fa-unlock-alt"></i></a>
+											<a href="{{ route('user-activities', ['id' => $user->id]) }}" class="change-psd-btn"><i class="fas fa-eye"></i></a>
+										</td>
 									</tr>
 									@endforeach 
 								</tbody>

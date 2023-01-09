@@ -28,11 +28,11 @@ Route::get('/', function () {
 Route::any('signin', [AuthController::class, 'signin'])->name('signin');
 Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 //Super Admin Routes
 Route::group(['middleware' => ['SuperAdminUserType']], function () {
-    Route::any('admins', [AdminTypeUserController::class, 'index'])->name('admins');
+    Route::get('admins', [AdminTypeUserController::class, 'index'])->name('admins');
     Route::any('add-admin', [AdminTypeUserController::class, 'addUser'])->name('add-admin');
     Route::post('save-admin', [AdminTypeUserController::class, 'saveUser'])->name('save-admin');
     Route::get('delete-admin/{id}', [AdminTypeUserController::class, 'deleteUser'])->name('delete-admin');
@@ -43,7 +43,7 @@ Route::group(['middleware' => ['CommonUserType']], function ()
 {
     // user
     Route::any('users', [UserController::class, 'index'])->name('users');
-    Route::any('add-user', [UserController::class, 'addUser'])->name('add-user');
+    Route::get('add-user', [UserController::class, 'addUser'])->name('add-user');
     Route::post('save-user', [UserController::class, 'saveUser'])->name('save-user');
     Route::get('delete-user/{id}', [UserController::class, 'deleteUser'])->name('delete-user');
     Route::any('user-change-password/{id}', [UserController::class, 'changePassword'])->name('user-change-password');

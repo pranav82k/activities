@@ -45,9 +45,9 @@ class ActivityController extends Controller
     {
         // create the validation rules ------------------------
         $rules = array(
-            'title'             => 'required',
-            'description'            => 'required',
-            'featured_image'         => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'featured_image' => 'required',
         );
 
         // do the validation ----------------------------------

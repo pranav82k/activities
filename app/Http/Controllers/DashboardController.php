@@ -14,7 +14,6 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    protected $current_active_contest_id;
     /**
      * Create a new controller instance.
      *
@@ -30,14 +29,14 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-
     public function index(Request $request)
     {
         if($request->ajax()) {
 
             $data = Activity::whereDate('created_at', '>=', $request->start)
-                       ->whereDate('created_at',   '<=', $request->end)
-                       ->get()->toArray();
+                       ->whereDate('created_at', '<=', $request->end)
+                       ->get()
+                       ->toArray();
 
             if(sizeof($data) > 0) {
                 foreach ($data as $key => $value) {

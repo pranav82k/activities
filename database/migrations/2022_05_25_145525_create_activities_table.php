@@ -19,7 +19,7 @@ class CreateActivitiesTable extends Migration
             $table->string('title', 120);
             $table->text('description');
             $table->string('featured_image', 120);
-            $table->tinyInteger('status')->default(1);
+            $table->boolean('status')->default(1);
             $table->softDeletes();
             $table->timestamps();
 
@@ -34,6 +34,10 @@ class CreateActivitiesTable extends Migration
      */
     public function down()
     {
+        // Schema::table('activities', function (Blueprint $table) {
+        //     $table->dropIndex(['type']);
+        // });
+
         Schema::dropIfExists('activities');
     }
 }

@@ -27,19 +27,18 @@ class UserController extends Controller
 
         if(Auth::check() && Auth::user()->user_role == 2)
         {
-            return redirect()->route('signin');
+            return redirect()->route('dashboard');
         }
     }
 
     /**
-     * Show the application dashboard.
+     * Show the Admin List.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
     {
         $params = $request->input();
-
         $users = User::where(array('user_role' => 2))->get();
 
         return view('superadmin.users', ['users' => $users, 'params' => $params]);
@@ -55,9 +54,9 @@ class UserController extends Controller
     {
         // create the validation rules ------------------------
         $rules = array(
-            'name'             => 'required',
-            'email'            => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
-            'password'         => 'required'
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
+            'password' => 'required|min:4'
         );
 
         // do the validation ----------------------------------
@@ -87,14 +86,11 @@ class UserController extends Controller
         if($user->save())
         {
             try{
+                /*\Mail::send('email_templates.welcome_email_template', ['params' => $params], function($message) use($params) {
+                    $message->to($params['email'])->subject('Welcome');
+                });*/
 
-                /*\Mail::send('email_templates.welcome_email_template', ['params' => $params], function($message) use($params){
-
-                        $message->to($params['email'])->subject('Welcome');
-
-                    });*/
-
-                Session::flash('message', 'User has created successfully.'); 
+                Session::flash('message', 'Admin has created successfully.'); 
                 Session::flash('class', 'success');
             }
             catch(\Exception $e)
@@ -115,16 +111,13 @@ class UserController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Delete Admin.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function deleteUser(Request $request, $id)
     {
-        $params = $request->input();
-
         $checkUserExistance = User::find($id);
-
         if ($checkUserExistance) 
         {
             if($checkUserExistance->delete())
@@ -156,7 +149,7 @@ class UserController extends Controller
         {
             // create the validation rules ------------------------
             $rules = array(
-                'password'             => 'required'
+                'password' => 'required'
             );
 
             // do the validation ----------------------------------
@@ -178,7 +171,6 @@ class UserController extends Controller
             $params = $request->post();
 
             $user = User::find($id);
-
             if($user)
             {
                 $user->password = bcrypt($params['password']);

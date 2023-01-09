@@ -8,9 +8,6 @@ use Validator;
 use Auth;
 use Session;
 use App\Models\User;
-use Carbon\Carbon;
-use DB;
-use Config;
 
 class UserController extends Controller
 {
@@ -57,9 +54,9 @@ class UserController extends Controller
         $params = $request->post(); 
         // create the validation rules ------------------------
         $rules = array(
-            'name'             => 'required',
-            'email'            => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
-            'password'         => 'required'
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
+            'password' => 'required'
         );
 
         // do the validation ----------------------------------
@@ -130,7 +127,6 @@ class UserController extends Controller
             {
                 Session::flash('message', 'Something went wrong'); 
                 Session::flash('class', 'danger');
-
             }
 
             return redirect()->route('users');
@@ -150,7 +146,7 @@ class UserController extends Controller
         {
             // create the validation rules ------------------------
             $rules = array(
-                'password'             => 'required'
+                'password' => 'required'
             );
 
             // do the validation ----------------------------------

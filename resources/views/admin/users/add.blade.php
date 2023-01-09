@@ -12,7 +12,7 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 floating-label-wrap">
                                         @csrf
-                                         <input name="name" type="text" class="floating-label-field floating-label-field--s1 name" id="inputName" placeholder="Name*" value="{{ old('name') }}" required>
+                                        <input name="name" type="text" class="floating-label-field floating-label-field--s1 name" id="inputName" placeholder="Name*" value="{{ old('name') }}" required>
                                         <label for="inputName" class="floating-label">Name*</label>
                                     </div>
                                 </div>

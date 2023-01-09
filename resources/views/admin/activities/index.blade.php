@@ -32,7 +32,7 @@
 				            <!-- <input type="text" class="myInputTextField"> -->
 				        </div>
 						<div class="table-responsive">
-							<table id="activities"  class="table no-wrap v-middle mb-0 dashboard-table responsive nowrap">
+							<table id="activities" class="table no-wrap v-middle mb-0 dashboard-table responsive nowrap">
 								<thead>
 									<tr class="border-0">
 										<th class="border-0 font-14 font-weight-medium text-muted">Sr.</th>

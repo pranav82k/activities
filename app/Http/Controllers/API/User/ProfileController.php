@@ -119,7 +119,7 @@ class ProfileController extends Controller
         else
         {
             // Default dates are previous week
-            $endDate = \Carbon\Carbon::now()->format('Y-m-d');
+            $endDate = Carbon::now()->format('Y-m-d');
             $startDate = Carbon::parse($endDate)->subDays(7)->format('Y-m-d');
         }
 
